@@ -6,11 +6,36 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:03:49 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 21:16:01 by asaadane         ###   ########.fr       */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	count_words(char *arg)
+{
+	int	i;
+	int	count;
+	int	in_word;
+
+	i = 0;
+	count = 0;
+	in_word = 0;
+	while (arg[i] != '\0')
+	{
+		if (arg[i] == ' ')
+		{
+			in_word = 0;
+		}
+		else if (!in_word)
+		{
+			count++;
+			in_word = 1;
+		}
+		i++;
+	}
+	return (count);
+}
 
 void	count_argv(char **av, int *size_a)
 {
@@ -22,19 +47,6 @@ void	count_argv(char **av, int *size_a)
 		*size_a += count_words(av[i]);
 		i++;
 	}
-}
-
-void	free_arguments(char **splited, int size_a)
-{
-	int	i;
-
-	i = 0;
-	while (i < size_a)
-	{
-		free(splited[i]);
-		i++;
-	}
-	free(splited);
 }
 
 void	splited_elements(char **splited, t_spl *var)

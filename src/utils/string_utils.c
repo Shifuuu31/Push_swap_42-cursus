@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_1.c                                          :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 16:04:14 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 18:42:36 by asaadane         ###   ########.fr       */
+/*   Created: 2026/11/16 15:46:00 by asaadane          #+#    #+#             */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ size_t	ft_strlen(char *s)
 	i = 0;
 	while (s[i] != '\0')
 		i++;
-	return (i);
-}
-
-int	ft_count_stack(int *stack)
-{
-	int	i;
-
-	i = 0;
-	while (stack[i])
-	{
-		i++;
-	}
 	return (i);
 }
 
@@ -51,7 +39,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char	*ft_strdup( char *s)
+char	*ft_strdup(char *s)
 {
 	size_t	len;
 	char	*ptr;
@@ -64,28 +52,39 @@ char	*ft_strdup( char *s)
 	return (ptr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+void	ft_strncpy(char *dest, const char *src, size_t n)
 {
-	char	*str;
 	size_t	i;
-	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
 	i = 0;
-	j = 0;
-	while (i < ft_strlen(s1))
+	while (i < n && src[i] != '\0')
 	{
-		str[j++] = s1[i++];
+		dest[i] = src[i];
+		i++;
 	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+}
+
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
+{
+	size_t	i;
+
 	i = 0;
-	while (i < ft_strlen(s2))
+	if (n == 0)
+		return (0);
+	if (str1 == str2)
+		return (0);
+	while (i < n - 1 && str1 && str2 && str1[i] == str2[i])
 	{
-		str[j++] = s2[i++];
+		i++;
+		if (!str1[i] || !str2[i])
+		{
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		}
 	}
-	str[j] = '\0';
-	return (str);
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }

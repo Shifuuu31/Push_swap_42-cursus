@@ -6,72 +6,11 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:03:52 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 21:20:13 by asaadane         ###   ########.fr       */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	check_sign(char *splited)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strlen(&splited[i]) > 12)
-	{
-		ft_put_error();
-	}
-	if (splited[i] == '-' || splited[i] == '+')
-		i++;
-	if (splited[i] == '\0')
-	{
-		ft_put_error();
-	}
-	while (splited[i] != '\0')
-	{
-		if (!ft_isdigit(splited[i]))
-		{
-			ft_put_error();
-		}
-		i++;
-	}
-}
-
-void	load_stacks(t_stack *stack, t_size *size, char **splited)
-{
-	int	i;
-
-	stack->a = (int *)malloc(sizeof(int) * (size->a + 1));
-	if (!stack->a)
-	{
-		free_arguments(splited, size->a);
-		exit (1);
-	}
-	size->b = 0;
-	stack->b = (int *)malloc(sizeof(int) * (size->a + 1));
-	if (!stack->b)
-	{
-		free(stack->a);
-		free_arguments(splited, size->a);
-		exit (1);
-	}
-	i = 0;
-	while (i < size->a)
-	{
-		check_sign(splited[i]);
-		stack->a[i] = ft_atoi(splited[i]);
-		i++;
-	}
-}
-
-void	ft_free_all(t_stack *stack, t_size *size, char **splited)
-{
-	free(stack->a);
-	free(stack->b);
-	free(stack);
-	free(size);
-	free_arguments(splited, size->a);
-}
 
 void	sorting(t_stack *stack, t_size *size, char **splited)
 {

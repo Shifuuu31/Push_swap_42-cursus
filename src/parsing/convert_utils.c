@@ -1,48 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_4.c                                          :+:      :+:    :+:   */
+/*   convert_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 18:32:39 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 20:54:26 by asaadane         ###   ########.fr       */
+/*   Created: 2026/11/16 15:46:00 by asaadane          #+#    #+#             */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_empty_arg(char **splited)
+int	ft_isdigit(int c)
 {
-	int		count;
-
-	count = 0;
-	while (splited[count])
+	if (c >= '0' && c <= '9')
 	{
-		count++;
+		return (1);
 	}
-	if (count == 0)
-		ft_put_error();
-}
-
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	if (str1 == str2)
-		return (0);
-	while (i < n - 1 && str1 && str2 && str1[i] == str2[i])
-	{
-		i++;
-		if (!str1[i] || !str2[i])
-		{
-			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-		}
-	}
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	return (0);
 }
 
 void	ft_put_error(void)
@@ -51,7 +27,7 @@ void	ft_put_error(void)
 	exit(1);
 }
 
-int	ft_atoi_tool(char *str)
+static int	ft_atoi_tool(char *str)
 {
 	int	result;
 	int	negative;

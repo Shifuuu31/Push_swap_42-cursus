@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_3.c                                          :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 18:27:04 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 18:41:52 by asaadane         ###   ########.fr       */
+/*   Created: 2026/11/16 15:46:00 by asaadane          #+#    #+#             */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (i < ft_strlen(s1))
+	{
+		str[j++] = s1[i++];
+	}
+	i = 0;
+	while (i < ft_strlen(s2))
+	{
+		str[j++] = s2[i++];
+	}
+	str[j] = '\0';
+	return (str);
+}
 
 char	*ft_substr(char *s, size_t start, size_t len)
 {
@@ -40,7 +66,7 @@ char	*ft_substr(char *s, size_t start, size_t len)
 	return (str);
 }
 
-static void	*ft_free(int j, char **p)
+static void	*ft_free_split(int j, char **p)
 {
 	while (j > 0)
 	{
@@ -51,7 +77,7 @@ static void	*ft_free(int j, char **p)
 	return (NULL);
 }
 
-static	int	word_len(char *str, char c, int i)
+static int	word_len(char *str, char c, int i)
 {
 	int	j;
 
@@ -64,7 +90,7 @@ static	int	word_len(char *str, char c, int i)
 	return (j);
 }
 
-static	size_t	word_counter(char const *str, char ch)
+static size_t	word_counter(char const *str, char ch)
 {
 	size_t	i;
 	size_t	counter;
@@ -101,13 +127,37 @@ char	**ft_split(const char *s, char c)
 	while (j < wc && s[i])
 	{
 		while (s[i] == c && s[i])
-				i++;
+			i++;
 		split[j] = ft_substr((char *)s, i, word_len((char *)s, c, i));
 		if (!split[j])
-			return (ft_free(j, split));
+			return (ft_free_split(j, split));
 		j++;
 		i = i + word_len((char *)s, c, i);
 	}
-		split[j] = NULL;
+	split[j] = NULL;
 	return (split);
+}
+
+int	ft_count(char **splited)
+{
+	int	i;
+
+	i = 0;
+	while (splited[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+int	ft_count_stack(int *stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack[i])
+	{
+		i++;
+	}
+	return (i);
 }

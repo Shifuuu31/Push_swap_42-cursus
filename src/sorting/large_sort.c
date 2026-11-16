@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:03:44 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 18:35:38 by asaadane         ###   ########.fr       */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	a_to_b(t_stack *stack, t_size *size, int num)
 			ra(stack->a, size->a, 1);
 		if (i == chunk && chunk < ((scale_chunk * num) + (size->a % num)))
 		{
-				chunk += scale_chunk;
+			chunk += scale_chunk;
 		}
 	}
 }

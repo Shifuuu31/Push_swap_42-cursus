@@ -1,36 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_2.c                                        :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 16:50:47 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 19:36:57 by asaadane         ###   ########.fr       */
+/*   Created: 2026/11/16 15:46:00 by asaadane          #+#    #+#             */
+/*   Updated: 2026/11/16 15:46:00 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_isdigit(int c)
+void	check_empty_arg(char **splited)
 {
-	if (c >= '0' && c <= '9')
+	int		count;
+
+	count = 0;
+	while (splited[count])
 	{
-		return (1);
+		count++;
 	}
-	return (0);
+	if (count == 0)
+		ft_put_error();
 }
 
-int	ft_count(char **splited)
+void	check_sign(char *splited)
 {
 	int	i;
 
 	i = 0;
-	while (splited[i])
+	if (ft_strlen(&splited[i]) > 12)
 	{
+		ft_put_error();
+	}
+	if (splited[i] == '-' || splited[i] == '+')
+		i++;
+	if (splited[i] == '\0')
+	{
+		ft_put_error();
+	}
+	while (splited[i] != '\0')
+	{
+		if (!ft_isdigit(splited[i]))
+		{
+			ft_put_error();
+		}
 		i++;
 	}
-	return (i);
 }
 
 void	ft_check_duplicate(int *stack_a, int size_a)
@@ -66,29 +83,4 @@ bool	ft_check_sorted(int *stack_a, int size_a)
 		i++;
 	}
 	return (true);
-}
-
-int	count_words(char *arg)
-{
-	int	i;
-	int	count;
-	int	in_word;
-
-	i = 0;
-	count = 0;
-	in_word = 0;
-	while (arg[i] != '\0')
-	{
-		if (arg[i] == ' ')
-		{
-			in_word = 0;
-		}
-		else if (!in_word)
-		{
-			count++;
-			in_word = 1;
-		}
-		i++;
-	}
-	return (count);
 }
