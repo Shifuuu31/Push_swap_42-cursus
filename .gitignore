@@ -1,0 +1,9 @@
+# Build artifacts
+*.o
+push_swap
+
+# Editor and OS files
+.DS_Store
+*.swp
+*~
+.vscode/
